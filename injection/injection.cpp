@@ -33,8 +33,22 @@ DWORD ProcessFind(LPCTSTR Exename) //进程名称
 
 int dll_inject() {
     //Dll文件地址,改成你自己的地址
-    const TCHAR *pLocDll = TEXT("F:\\工作\\项目\\控制台\\injection\\injection\\x64\\Release\\injectionDll.dll");
+	TCHAR _szPath[MAX_PATH + 1] = { 0 };
+	GetModuleFileName(NULL, _szPath, MAX_PATH);
+	(_tcsrchr(_szPath, _T('\\')))[1] = 0;//删除文件名，只获得路径 字串
 
+	const TCHAR *pNameDll = TEXT("LoveDll.dll");
+
+	int len_szPath = lstrlen(_szPath);
+	int len_pNameDll = lstrlen(pNameDll);
+	TCHAR* szBuff = new TCHAR[len_szPath + len_pNameDll + 1];
+	szBuff[0] = _T('\0');
+	lstrcat(szBuff, _szPath);
+	lstrcat(szBuff, pNameDll);
+	const TCHAR *pLocDll = szBuff;
+
+	/*const TCHAR *pLocDll = TEXT("G:\\代码\\vs c++\\love\\x64\\Release\\injectionDll.dll");
+	const TCHAR *pNameDll = TEXT("injectionDll.dll");*/
     HANDLE hThread = NULL;
 
     //记事本进程名称
@@ -47,13 +61,13 @@ int dll_inject() {
         HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, TRUE, ProcessID);
 
         //获取dll大小
-        SIZE_T PathSize = (_tcslen(TEXT("injectionDll.dll")) + 1) * sizeof(TCHAR);
+        SIZE_T PathSize = (_tcslen(pNameDll) + 1) * sizeof(TCHAR);
 
         //申请内存
         LPVOID StartAddress = VirtualAllocEx(hProcess, NULL, PathSize, MEM_COMMIT, PAGE_READWRITE);
 
         //写入内存
-        bool bSuccess = WriteProcessMemory(hProcess, StartAddress, TEXT("injectionDll.dll"), PathSize, 0);
+        bool bSuccess = WriteProcessMemory(hProcess, StartAddress, pNameDll, PathSize, 0);
         if (!bSuccess)
         {
             cout << "写入失败" << endl;
@@ -95,5 +109,4 @@ int dll_inject() {
 int main()
 {
     dll_inject();
-    system("pause");
 }
