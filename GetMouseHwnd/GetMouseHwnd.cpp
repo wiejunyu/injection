@@ -42,10 +42,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine,
 	);
 	ShowWindow(hwnd, iCmdShow);
 	UpdateWindow(hwnd);
-	if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+	while (true)
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		{
+			if (msg.message == WM_QUIT)
+			{
+				break;
+			}
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
 	}
 	return msg.wParam;
 }
@@ -88,8 +95,8 @@ LRESULT CALLBACK MouseProc(
 		{
 			pBUTTON.x = LOWORD(lParam);
 			pBUTTON.y = HIWORD(lParam);
-			hGetWindows = WindowFromPoint(pBUTTON);
-			PostThreadMessage(g_dwThreadID, WM_DESTROY, pBUTTON.x, pBUTTON.y);
+			//hGetWindows = WindowFromPoint(pBUTTON);
+			PostThreadMessage(g_dwThreadID, WM_MYMBUTTONDOWN, pBUTTON.x, pBUTTON.y);
 		}
 	}
 	return CallNextHookEx(g_hKeyboardHook, nCode, wParam, lParam);
