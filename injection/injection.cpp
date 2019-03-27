@@ -33,26 +33,26 @@ DWORD ProcessFind(LPCTSTR Exename) //进程名称
 
 int dll_inject() {
     //Dll文件地址,改成你自己的地址
-	TCHAR _szPath[MAX_PATH + 1] = { 0 };
-	GetModuleFileName(NULL, _szPath, MAX_PATH);
-	(_tcsrchr(_szPath, _T('\\')))[1] = 0;//删除文件名，只获得路径 字串
+	//TCHAR _szPath[MAX_PATH + 1] = { 0 };
+	//GetModuleFileName(NULL, _szPath, MAX_PATH);
+	//(_tcsrchr(_szPath, _T('\\')))[1] = 0;//删除文件名，只获得路径 字串
 
+	//const TCHAR *pNameDll = TEXT("LoveDll.dll");
+
+	//int len_szPath = lstrlen(_szPath);
+	//int len_pNameDll = lstrlen(pNameDll);
+	//TCHAR* szBuff = new TCHAR[len_szPath + len_pNameDll + 1];
+	//szBuff[0] = _T('\0');
+	//lstrcat(szBuff, _szPath);
+	//lstrcat(szBuff, pNameDll);
+	//const TCHAR *pLocDll = szBuff;
+
+	const TCHAR *pLocDll = TEXT("F:\\工作\\项目\\控制台\\Love\\x64\\Release\\LoveDll.dll");
 	const TCHAR *pNameDll = TEXT("LoveDll.dll");
-
-	int len_szPath = lstrlen(_szPath);
-	int len_pNameDll = lstrlen(pNameDll);
-	TCHAR* szBuff = new TCHAR[len_szPath + len_pNameDll + 1];
-	szBuff[0] = _T('\0');
-	lstrcat(szBuff, _szPath);
-	lstrcat(szBuff, pNameDll);
-	const TCHAR *pLocDll = szBuff;
-
-	/*const TCHAR *pLocDll = TEXT("G:\\代码\\vs c++\\love\\x64\\Release\\injectionDll.dll");
-	const TCHAR *pNameDll = TEXT("injectionDll.dll");*/
     HANDLE hThread = NULL;
 
     //记事本进程名称
-    DWORD ProcessID = ProcessFind(TEXT("notepad.exe"));
+    DWORD ProcessID = ProcessFind(TEXT("WINWORD.EXE"));
     if (!ProcessID) {
         cout << "查找不到当前程序" << endl;
     }
