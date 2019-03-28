@@ -17,18 +17,11 @@ extern "C" BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpv
 			hWnd = ::FindWindowEx(hWnd, 0, TEXT("EDIT"), NULL);
 		if (hWnd)
 		{
-			::MessageBox(hWnd, TEXT("开始注入"), TEXT("提示"), MB_OK);
-			for (int i = 0; i < 100; i++)
-			{
-				PostMessageW(hWnd, WM_CHAR, L'我', 1);
-				PostMessageW(hWnd, WM_CHAR, L'喜', 1);
-				PostMessageW(hWnd, WM_CHAR, L'欢', 1);
-				PostMessageW(hWnd, WM_CHAR, L'你', 1);
-			}
+			MessageBox(hWnd, TEXT("开始注入"), TEXT("提示"), MB_OK);
 		}
 		else
 		{
-			::MessageBox(hWnd, TEXT("记事本不存在"), TEXT("提示"), MB_OK);
+			MessageBox(hWnd, TEXT("记事本不存在"), TEXT("提示"), MB_OK);
 		}
 		break;
 	case DLL_PROCESS_DETACH:
