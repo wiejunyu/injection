@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LoveDll", "LoveDll\LoveDll.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GetMouseHwnd", "GetMouseHwnd\GetMouseHwnd.vcxproj", "{76D63F7F-3EAB-4042-BD95-D5FF25093330}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "InjectionWord", "InjectionWord\InjectionWord.vcxproj", "{4F7572BB-A996-4F85-AE50-78087594134F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{76D63F7F-3EAB-4042-BD95-D5FF25093330}.Release|x64.Build.0 = Release|x64
 		{76D63F7F-3EAB-4042-BD95-D5FF25093330}.Release|x86.ActiveCfg = Release|Win32
 		{76D63F7F-3EAB-4042-BD95-D5FF25093330}.Release|x86.Build.0 = Release|Win32
+		{4F7572BB-A996-4F85-AE50-78087594134F}.Debug|x64.ActiveCfg = Debug|x64
+		{4F7572BB-A996-4F85-AE50-78087594134F}.Debug|x64.Build.0 = Debug|x64
+		{4F7572BB-A996-4F85-AE50-78087594134F}.Debug|x86.ActiveCfg = Debug|Win32
+		{4F7572BB-A996-4F85-AE50-78087594134F}.Debug|x86.Build.0 = Debug|Win32
+		{4F7572BB-A996-4F85-AE50-78087594134F}.Release|x64.ActiveCfg = Release|x64
+		{4F7572BB-A996-4F85-AE50-78087594134F}.Release|x64.Build.0 = Release|x64
+		{4F7572BB-A996-4F85-AE50-78087594134F}.Release|x86.ActiveCfg = Release|Win32
+		{4F7572BB-A996-4F85-AE50-78087594134F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

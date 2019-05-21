@@ -18,6 +18,7 @@ extern "C" BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpv
 		if (hWnd)
 		{
 			MessageBox(hWnd, TEXT("开始注入"), TEXT("提示"), MB_OK);
+			PostMessage(hWnd, WM_CHAR, L' ', 1);
 		}
 		else
 		{
