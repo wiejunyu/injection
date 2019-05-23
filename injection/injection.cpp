@@ -33,24 +33,24 @@ DWORD ProcessFind(LPCTSTR Exename) //进程名称
 
 int dll_inject() {
 	#pragma region 文件EXE路径获得DLL路径
-	//TCHAR _szPath[MAX_PATH + 1] = { 0 };
-	//GetModuleFileName(NULL, _szPath, MAX_PATH);
-	//(_tcsrchr(_szPath, _T('\\')))[1] = 0;//删除文件名，只获得路径 字串
+	TCHAR _szPath[MAX_PATH + 1] = { 0 };
+	GetModuleFileName(NULL, _szPath, MAX_PATH);
+	(_tcsrchr(_szPath, _T('\\')))[1] = 0;//删除文件名，只获得路径 字串
 
-	//const TCHAR *pNameDll = TEXT("LoveDll.dll");
+	const TCHAR *pNameDll = TEXT("LoveDll.dll");
 
-	//int len_szPath = lstrlen(_szPath);
-	//int len_pNameDll = lstrlen(pNameDll);
-	//TCHAR* szBuff = new TCHAR[len_szPath + len_pNameDll + 1];
-	//szBuff[0] = _T('\0');
-	//lstrcat(szBuff, _szPath);
-	//lstrcat(szBuff, pNameDll);
-	//const TCHAR *pLocDll = szBuff;
+	int len_szPath = lstrlen(_szPath);
+	int len_pNameDll = lstrlen(pNameDll);
+	TCHAR* szBuff = new TCHAR[len_szPath + len_pNameDll + 1];
+	szBuff[0] = _T('\0');
+	lstrcat(szBuff, _szPath);
+	lstrcat(szBuff, pNameDll);
+	const TCHAR *pLocDll = szBuff;
 	#pragma endregion
 
 	#pragma region 手动路径
-	const TCHAR *pLocDll = TEXT("F:\\工作\\项目\\控制台\\Love\\x64\\Release\\LoveDll.dll");
-	const TCHAR *pNameDll = TEXT("LoveDll.dll");
+	/*const TCHAR *pLocDll = TEXT("F:\\工作\\项目\\控制台\\Love\\x64\\Release\\LoveDll.dll");
+	const TCHAR *pNameDll = TEXT("LoveDll.dll");*/
 	#pragma endregion
 
     HANDLE hThread = NULL;
@@ -94,5 +94,10 @@ int dll_inject() {
 }
 int main()
 {
+	int re = 0;
+	re = WinExec("notepad.exe", SW_SHOWNORMAL);
+	if (re < 31) {
+		cout << "打开记事本失败";
+	}
     dll_inject();
 }

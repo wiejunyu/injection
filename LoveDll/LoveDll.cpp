@@ -18,7 +18,7 @@ extern "C" BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpv
 			hWnd = ::FindWindowEx(hWnd, 0, TEXT("EDIT"), NULL);
 		if (hWnd)
 		{
-			::MessageBox(hWnd, TEXT("开始注入"), TEXT("提示"), MB_OK);
+			//::MessageBox(NULL, TEXT("开始注入"), TEXT("提示"), MB_OK);
 			MyPostMessage(hWnd);
 		}
 		else
@@ -68,516 +68,542 @@ HWND GetMainWindow()
 
 void MyPostMessage(HWND hWnd)
 {
+	HWND fhWnd;
+	#pragma region 字体操作，如果字体不一致会导致团变形
+	LOGFONT LogFont;
+	memset(&LogFont, 0, sizeof(LOGFONT));
+	lstrcpy(LogFont.lfFaceName, L"SimSun");
+	LogFont.lfWeight = FW_BLACK;//FW_NORMAL;
+	LogFont.lfHeight = -24; // 字体大小
+	LogFont.lfCharSet = 134;
+	LogFont.lfOutPrecision = 3;
+	LogFont.lfClipPrecision = 2;
+	LogFont.lfOrientation = 45;
+	LogFont.lfQuality = 1;
+	LogFont.lfPitchAndFamily = 2;
+	// 创建字体
+	HFONT hFont = CreateFontIndirect(&LogFont);
+	// 取得控件句柄
+	PostMessage(hWnd, WM_SETFONT, (WPARAM)hFont, TRUE);
+	#pragma endregion
+
+	#pragma region 最大化操作，以免显示不完图案
+	fhWnd = GetParent(hWnd);
+	PostMessage(fhWnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0); // 最大化
+	#pragma endregion
+
+	#pragma region 图案操作
 	for (int i = 0; i < 25; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 33; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
 	for (int i = 0; i < 7; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 17; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 16; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
 	for (int i = 0; i < 15; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 23; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
 	for (int i = 0; i < 19; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 13; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 12; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
 	for (int i = 0; i < 24; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 15; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 27; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L']', 1);
+	PostMessage(hWnd, WM_CHAR, L']', 1);
 	for (int i = 0; i < 10; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 9; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 31; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 11; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 31; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 8; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 7; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 35; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 7; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 35; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 6; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 5; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 39; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 39; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 4; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 3; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 87; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 89; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
 	for (int i = 0; i < 90; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'=', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'=', 1);
 	for (int i = 0; i < 91; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L'=', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'=', 1);
 	for (int i = 0; i < 93; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 94; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L'=', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'=', 1);
 	for (int i = 0; i < 93; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L'=', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'=', 1);
 	for (int i = 0; i < 93; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L'=', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'=', 1);
 	for (int i = 0; i < 93; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 93; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
 	for (int i = 0; i < 93; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 92; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'=', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'=', 1);
 	for (int i = 0; i < 90; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'^', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'^', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 3; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 88; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 4; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
 	for (int i = 0; i < 88; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 4; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 86; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L' ', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L' ', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 5; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 84; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 3; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 7; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 80; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
 	for (int i = 0; i < 5; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 8; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 78; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 6; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 9; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 76; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 7; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 11; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 72; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
 	for (int i = 0; i < 9; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 12; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'=', 1);
+	PostMessage(hWnd, WM_CHAR, L'=', 1);
 	for (int i = 0; i < 70; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'^', 1);
+	PostMessage(hWnd, WM_CHAR, L'^', 1);
 	for (int i = 0; i < 10; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 13; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 67; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 11; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 15; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 64; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 13; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 17; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 60; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
 	for (int i = 0; i < 15; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 18; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 58; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 16; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 20; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 54; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 18; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 22; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 50; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 20; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 24; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 46; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 22; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 26; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 42; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 24; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 28; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 37; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 26; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 30; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 32; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'[', 1);
+	PostMessage(hWnd, WM_CHAR, L'[', 1);
 	for (int i = 0; i < 29; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 33; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 27; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 31; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 36; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 22; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 34; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 39; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 16; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'[', 1);
+	PostMessage(hWnd, WM_CHAR, L'[', 1);
 	for (int i = 0; i < 37; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 42; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
 	for (int i = 0; i < 10; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'/', 1);
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'/', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
 	for (int i = 0; i < 39; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 44; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L',', 1);
+	PostMessage(hWnd, WM_CHAR, L',', 1);
 	for (int i = 0; i < 6; i++) {
-		PostMessageW(hWnd, WM_CHAR, L'O', 1);
+		PostMessage(hWnd, WM_CHAR, L'O', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 42; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
 	for (int i = 0; i < 46; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'.', 1);
-	PostMessageW(hWnd, WM_CHAR, L'\\', 1);
-	PostMessageW(hWnd, WM_CHAR, L'O', 1);
-	PostMessageW(hWnd, WM_CHAR, L'`', 1);
+	PostMessage(hWnd, WM_CHAR, L'.', 1);
+	PostMessage(hWnd, WM_CHAR, L'\\', 1);
+	PostMessage(hWnd, WM_CHAR, L'O', 1);
+	PostMessage(hWnd, WM_CHAR, L'`', 1);
 	for (int i = 0; i < 44; i++) {
-		PostMessageW(hWnd, WM_CHAR, L' ', 1);
+		PostMessage(hWnd, WM_CHAR, L' ', 1);
 	}
-	PostMessageW(hWnd, WM_CHAR, L'\n', 1);
+	PostMessage(hWnd, WM_CHAR, L'\n', 1);
+	#pragma endregion
 }
